@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memory", "Memory\Memory.csproj", "{ABAF3894-D34C-48D9-8B9F-73C1046B9E3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCCTStats", "SCCTStats\SCCTStats.csproj", "{B0405B72-A7A7-40A1-8426-61747A05A4AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABAF3894-D34C-48D9-8B9F-73C1046B9E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABAF3894-D34C-48D9-8B9F-73C1046B9E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABAF3894-D34C-48D9-8B9F-73C1046B9E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABAF3894-D34C-48D9-8B9F-73C1046B9E3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0405B72-A7A7-40A1-8426-61747A05A4AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0405B72-A7A7-40A1-8426-61747A05A4AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0405B72-A7A7-40A1-8426-61747A05A4AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0405B72-A7A7-40A1-8426-61747A05A4AC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31141F8D-11BA-46CC-A87C-8395A4B466F6}
+	EndGlobalSection
+EndGlobal
