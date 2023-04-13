@@ -36,7 +36,7 @@ namespace SCCTStats
 
         private void onIGTChange(double value)
         {
-            var minutes = (int) Math.Truncate(value / 60);
+            var minutes = (int)Math.Truncate(value / 60);
             var seconds = value - (minutes * 60);
             timerText.Text = string.Format("{0:00}:{1:00.0}", minutes, seconds);
         }

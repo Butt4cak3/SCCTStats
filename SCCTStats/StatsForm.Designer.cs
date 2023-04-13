@@ -59,6 +59,15 @@
             label2.TabIndex = 2;
             label2.Text = "Movement speed";
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(3, 40);
+            label3.Name = "label3";
+            label3.Size = new Size(44, 15);
+            label3.TabIndex = 4;
+            label3.Text = "Alarms";
+            // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
@@ -101,15 +110,6 @@
             movementSpeedText.TabIndex = 3;
             movementSpeedText.Text = "None";
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(3, 40);
-            label3.Name = "label3";
-            label3.Size = new Size(44, 15);
-            label3.TabIndex = 4;
-            label3.Text = "Alarms";
-            // 
             // alarmsText
             // 
             alarmsText.AutoSize = true;
@@ -126,7 +126,7 @@
             ClientSize = new Size(504, 388);
             Controls.Add(tableLayoutPanel1);
             Name = "StatsForm";
-            Text = "Form1";
+            Text = "SCCTStats";
             TopMost = true;
             FormClosing += onFormClosing;
             Shown += onFormShown;
