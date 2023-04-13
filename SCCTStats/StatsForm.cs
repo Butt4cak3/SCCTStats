@@ -1,4 +1,5 @@
 ﻿using Memory;
+using System.Diagnostics;
 
 namespace SCCTStats
 {
@@ -49,6 +50,12 @@ namespace SCCTStats
         private void onAlarmsChange(int value)
         {
             alarmsText.Text = value.ToString();
+        }
+
+        private void StatsForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _game.Stop();
+            Application.Exit();
         }
 
         private void connect<TControl, TValue>(TControl control, IPointer<TValue> pointer, ChangeHandler<TValue> changeHandler) where TControl : Control

@@ -1,12 +1,17 @@
 ﻿using Memory;
+using System.ComponentModel;
 
 namespace SCCTStats
 {
+    public delegate void ReadErrorHandler();
+
     public class GameObserver
     {
         public readonly IPointer<MovementSpeed> MovementSpeed;
         public readonly IPointer<double> IGT;
         public readonly IPointer<int> Alarms;
+
+        public event ReadErrorHandler? OnReadError;
 
         private IMemoryReader _memory;
         private List<IUpdatable> _pointers;
@@ -25,15 +30,21 @@ namespace SCCTStats
 
         public void Start()
         {
-            _continue = true;
-
-            while (_continue)
+            try
             {
-                foreach (var pointer in _pointers)
+                _continue = true;
+
+                while (_continue)
                 {
-                    pointer.CheckForChanges();
+                    foreach (var pointer in _pointers)
+                    {
+                        pointer.CheckForChanges();
+                    }
+                    Thread.Sleep(_pollInterval);
                 }
-                Thread.Sleep(_pollInterval);
+            } catch (Win32Exception e)
+            {
+                OnReadError?.Invoke();
             }
         }
 

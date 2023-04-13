@@ -1,4 +1,4 @@
-using Memory;
+using System.Diagnostics;
 
 namespace SCCTStats
 {
@@ -10,14 +10,37 @@ namespace SCCTStats
         [STAThread]
         static void Main()
         {
-            var memory = MemoryReader.FromProcessName("splintercell3");
-            var game = new GameObserver(memory, 50);
-            var observerThread = new Thread(new ThreadStart(game.Start));
-            observerThread.Start();
             ApplicationConfiguration.Initialize();
-            Application.Run(new StatsForm(game));
-            game.Stop();
-            observerThread.Join();
+            var waitForm = new WaitingForGameForm();
+            StatsForm? statsForm = null;
+
+            var connector = new GameConnector();
+
+            connector.OnConnect += (game) =>
+            {
+                var observerThread = new Thread(new ThreadStart(game.Start));
+                observerThread.Start();
+                waitForm.Invoke(() =>
+                {
+                    statsForm = new StatsForm(game);
+                    statsForm.Show();
+                    waitForm.Hide();
+                });
+            };
+
+            connector.OnDisconnect += () =>
+            {
+                waitForm.Invoke(() =>
+                {
+                    statsForm?.Close();
+                    waitForm.Show();
+                });
+            };
+
+            var connectorThread = new Thread(new ThreadStart(connector.Watch));
+            connectorThread.Start();
+            Application.Run(waitForm);
+            connector.Stop();
         }
     }
 }

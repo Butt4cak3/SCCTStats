@@ -31,13 +31,14 @@
             Label label1;
             Label label2;
             Label label3;
-            tableLayoutPanel1 = new TableLayoutPanel();
+            TableLayoutPanel tableLayoutPanel1;
             timerText = new Label();
             movementSpeedText = new Label();
             alarmsText = new Label();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
+            tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -129,6 +130,7 @@
             Text = "SCCTStats";
             TopMost = true;
             FormClosing += onFormClosing;
+            FormClosed += StatsForm_FormClosed;
             Shown += onFormShown;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
