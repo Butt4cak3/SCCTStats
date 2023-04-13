@@ -6,8 +6,10 @@ namespace SCCTStats
     {
         public readonly IPointer<MovementSpeed> MovementSpeed;
         public readonly IPointer<double> IGT;
+        public readonly IPointer<int> Alarms;
 
         private IMemoryReader _memory;
+        private List<IUpdatable> _pointers;
         private bool _continue = true;
         private int _pollInterval;
 
@@ -15,8 +17,10 @@ namespace SCCTStats
         {
             _memory = memory;
             _pollInterval = pollInterval;
-            MovementSpeed = new MovementSpeedPointer(_memory, new int[] { 0x00A11E08, 0x6C, 0x3F0 });
-            IGT = new DoublePointer(_memory, new int[] { 0x0090B734, 0x10, 0x14, 0x80 });
+            _pointers = new List<IUpdatable>();
+            MovementSpeed = register(new MovementSpeedPointer(_memory, new int[] { 0x00A11E08, 0x6C, 0x3F0 }));
+            IGT = register(new DoublePointer(_memory, new int[] { 0x0090B734, 0x10, 0x14, 0x80 }));
+            Alarms = register(new IntPointer(_memory, new int[] { 0x00A17608, 0x6C, 0x40, 0xC48 }));
         }
 
         public void Start()
@@ -25,8 +29,10 @@ namespace SCCTStats
 
             while (_continue)
             {
-                MovementSpeed.CheckForChanges();
-                IGT.CheckForChanges();
+                foreach (var pointer in _pointers)
+                {
+                    pointer.CheckForChanges();
+                }
                 Thread.Sleep(_pollInterval);
             }
         }
@@ -34,6 +40,12 @@ namespace SCCTStats
         public void Stop()
         {
             _continue = false;
+        }
+
+        private IPointer<T> register<T>(IPointer<T> pointer)
+        {
+            _pointers.Add(pointer);
+            return pointer;
         }
     }
 }
